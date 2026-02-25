@@ -93,6 +93,34 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
+    // ===== UC6: Queue + Stack Based Palindrome Check =====
+    public static void checkPalindromeUsingQueueAndStack() {
+        String word = "madam";
+
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+
+        // Enqueue and push characters
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            queue.add(ch);
+            stack.push(ch);
+        }
+
+        boolean isPalindrome = true;
+
+        // Compare dequeue and pop
+        while (!queue.isEmpty()) {
+            if (queue.remove() != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("UC6 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
 
     // ===== Main Method =====
     public static void main(String[] args) {
