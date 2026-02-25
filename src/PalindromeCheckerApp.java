@@ -1,3 +1,9 @@
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Deque;
+import java.util.ArrayDeque;
+
 public class PalindromeCheckerApp {
 
     // ===== UC1: Application Entry & Welcome Message =====
@@ -63,20 +69,41 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
+    // ===== UC5: Stack-Based Palindrome Checker =====
+    public static void checkPalindromeUsingStack() {
+        String word = "madam";
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for (int i = 0; i < word.length(); i++) {
+            stack.push(word.charAt(i));
+        }
+
+        boolean isPalindrome = true;
+
+        // Pop and compare
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("UC5 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
+
     // ===== Main Method =====
     public static void main(String[] args) {
 
-        // UC1
-        displayWelcomeMessage();
-
-        // UC2
-        checkHardcodedPalindrome();
-
-        // UC3
-        checkPalindromeUsingStringReverse();
-
-        // UC4
-        checkPalindromeUsingCharArray();
+        displayWelcomeMessage();          // UC1
+        checkHardcodedPalindrome();       // UC2
+        checkPalindromeUsingStringReverse(); // UC3
+        checkPalindromeUsingCharArray();  // UC4
+        checkPalindromeUsingStack();      // UC5
+        checkPalindromeUsingQueueAndStack(); // UC6
+        checkPalindromeUsingDeque();      // UC7
     }
 
 }
