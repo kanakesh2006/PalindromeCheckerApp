@@ -23,4 +23,22 @@ public class PalindromeCheckerApp {
         System.out.println("UC2 → Is it a palindrome? " + isPalindrome);
         System.out.println();
     }
+
+    // ===== UC3: Palindrome Check Using String Reverse =====
+    public static void checkPalindromeUsingStringReverse() {
+        String original = "madam";
+        String reversed = "";
+
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
+        }
+
+        boolean isPalindrome = original.equals(reversed);
+
+        System.out.println("UC3 → Original String: " + original);
+        System.out.println("UC3 → Reversed String: " + reversed);
+        System.out.println("UC3 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
 }
