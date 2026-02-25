@@ -121,6 +121,30 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
+    // ===== UC7: Deque-Based Optimized Palindrome Checker =====
+    public static void checkPalindromeUsingDeque() {
+        String word = "madam";
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // Insert characters into deque
+        for (int i = 0; i < word.length(); i++) {
+            deque.addLast(word.charAt(i));
+        }
+
+        boolean isPalindrome = true;
+
+        // Remove first and last and compare
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("UC7 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
 
     // ===== Main Method =====
     public static void main(String[] args) {
