@@ -41,4 +41,42 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
+    // ===== UC4: Character Array Based Palindrome Check =====
+    public static void checkPalindromeUsingCharArray() {
+        String word = "madam";
+        char[] characters = word.toCharArray();
+
+        int start = 0;
+        int end = characters.length - 1;
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (characters[start] != characters[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        System.out.println("UC4 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
+    // ===== Main Method =====
+    public static void main(String[] args) {
+
+        // UC1
+        displayWelcomeMessage();
+
+        // UC2
+        checkHardcodedPalindrome();
+
+        // UC3
+        checkPalindromeUsingStringReverse();
+
+        // UC4
+        checkPalindromeUsingCharArray();
+    }
+
 }
