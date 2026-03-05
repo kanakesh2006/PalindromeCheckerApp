@@ -146,7 +146,7 @@ public class PalindromeCheckerApp {
     }
 
 
-    public static void LinkedListBasedPalindromeChecker() {
+    public static void checkLinkedListBasedPalindromeChecker() {
 
         // Define the input string
         String input = "level";
@@ -187,6 +187,42 @@ public class PalindromeCheckerApp {
         }
     }
 
+    // ===== UC9: Recursive Palindrome Checker =====
+    public static void checkPalindromeUsingRecursion() {
+
+        String word = "madam";
+
+        boolean isPalindrome = check(word, 0, word.length() - 1);
+
+        System.out.println("UC9 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
+    /*
+     Recursively checks whether a string is palindrome.
+
+     @param s Input string
+     @param start Starting index
+     @param end Ending index
+     @return true if palindrome, otherwise false
+    */
+    private static boolean check(String s, int start, int end) {
+
+        // Base Condition: if pointers cross or meet
+        if (start >= end) {
+            return true;
+        }
+
+        // If characters do not match
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call moving inward
+        return check(s, start + 1, end - 1);
+    }
+
+
 
     // ===== Main Method =====
     public static void main(String[] args) {
@@ -198,7 +234,8 @@ public class PalindromeCheckerApp {
         checkPalindromeUsingStack();      // UC5
         checkPalindromeUsingQueueAndStack(); // UC6
         checkPalindromeUsingDeque();      // UC7
-        LinkedListBasedPalindromeChecker()  // UC8
+        checkLinkedListBasedPalindromeChecker()  // UC8
+        checkPalindromeUsingRecursion();     // UC9
     }
 
 }
