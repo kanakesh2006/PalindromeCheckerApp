@@ -145,7 +145,7 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
-
+    // ===== UC8: LinkedList-Based Palindrome Checker =====
     public static void checkLinkedListBasedPalindromeChecker() {
 
         // Define the input string
@@ -252,6 +252,22 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
+    // ===== UC11: Object-Oriented Palindrome Service =====
+    public static void checkPalindromeUsingServiceClass() {
+
+        String input = "madam";
+
+        // Create service object
+        PalindromeService service = new PalindromeService();
+
+        // Call service method
+        boolean result = service.checkPalindrome(input);
+
+        System.out.println("UC11 → Input String: " + input);
+        System.out.println("UC11 → Is it a palindrome? " + result);
+        System.out.println();
+    }
+
 
 
     // ===== Main Method =====
@@ -264,9 +280,43 @@ public class PalindromeCheckerApp {
         checkPalindromeUsingStack();      // UC5
         checkPalindromeUsingQueueAndStack(); // UC6
         checkPalindromeUsingDeque();      // UC7
-        checkLinkedListBasedPalindromeChecker()  // UC8
+        checkLinkedListBasedPalindromeChecker();  // UC8
         checkPalindromeUsingRecursion();     // UC9
         checkNormalizedPalindrome();         // UC10
+        checkPalindromeUsingServiceClass(); // UC11
     }
 
+}
+
+
+// ===== Palindrome Service Class (OOP Encapsulation) =====
+class PalindromeService {
+
+    /*
+     Checks whether the input string is a palindrome
+
+     @param input Input string
+     @return true if palindrome, false otherwise
+    */
+    public boolean checkPalindrome(String input) {
+
+        if (input == null) {
+            return false;
+        }
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
 }
