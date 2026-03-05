@@ -1,4 +1,4 @@
-import java.util.Stack;
+import  java.util.Stack;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Deque;
@@ -146,6 +146,48 @@ public class PalindromeCheckerApp {
     }
 
 
+    public static void LinkedListBasedPalindromeChecker() {
+
+        // Define the input string
+        String input = "level";
+
+        // Convert to lowercase (optional but good practice)
+        input = input.toLowerCase();
+
+        // Create a LinkedList to store characters
+        LinkedList<Character> list = new LinkedList<>();
+
+        // Add each character to the linked list
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
+
+        // Flag to track palindrome state
+        boolean isPalindrome = true;
+
+        // Compare until only one or zero elements remain
+        while (list.size() > 1) {
+
+            // Remove first and last characters
+            char first = list.removeFirst();
+            char last = list.removeLast();
+
+            // Compare them
+            if (first != last) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        // Print result
+        if (isPalindrome) {
+            System.out.println(input + " is a Palindrome");
+        } else {
+            System.out.println(input + " is NOT a Palindrome");
+        }
+    }
+
+
     // ===== Main Method =====
     public static void main(String[] args) {
 
@@ -156,6 +198,7 @@ public class PalindromeCheckerApp {
         checkPalindromeUsingStack();      // UC5
         checkPalindromeUsingQueueAndStack(); // UC6
         checkPalindromeUsingDeque();      // UC7
+        LinkedListBasedPalindromeChecker()  // UC8
     }
 
 }
