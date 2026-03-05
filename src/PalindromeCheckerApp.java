@@ -268,6 +268,37 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
+    // ===== UC12: Strategy Pattern for Palindrome Algorithms =====
+    public static void checkPalindromeUsingStrategyPattern() {
+
+        String input = "madam";
+
+        // Choose algorithm dynamically
+        PalindromeStrategy strategy;
+
+        // Example: use Stack strategy
+        strategy = new StackStrategy();
+
+        boolean result = strategy.check(input);
+
+        System.out.println("UC12 → Using Stack Strategy");
+        System.out.println("UC12 → Input: " + input);
+        System.out.println("UC12 → Is it a palindrome? " + result);
+        System.out.println();
+
+        // Switch to another algorithm at runtime
+        strategy = new DequeStrategy();
+
+        result = strategy.check(input);
+
+        System.out.println("UC12 → Using Deque Strategy");
+        System.out.println("UC12 → Input: " + input);
+        System.out.println("UC12 → Is it a palindrome? " + result);
+        System.out.println();
+    }
+
+
+
 
 
     // ===== Main Method =====
@@ -284,6 +315,7 @@ public class PalindromeCheckerApp {
         checkPalindromeUsingRecursion();     // UC9
         checkNormalizedPalindrome();         // UC10
         checkPalindromeUsingServiceClass(); // UC11
+        checkPalindromeUsingStrategyPattern(); // UC12
     }
 
 }
@@ -315,6 +347,52 @@ class PalindromeService {
 
             start++;
             end--;
+        }
+
+        return true;
+    }
+}
+
+// ===== Stack-Based Strategy =====
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
+        // Push characters to stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        // Compare with original
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+// ===== Deque-Based Strategy =====
+class DequeStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        java.util.Deque<Character> deque = new java.util.ArrayDeque<>();
+
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
+        }
+
+        while (deque.size() > 1) {
+
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+
         }
 
         return true;
