@@ -145,8 +145,8 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
-
-    public static void LinkedListBasedPalindromeChecker() {
+    // ===== UC8: LinkedList-Based Palindrome Checker =====
+    public static void checkLinkedListBasedPalindromeChecker() {
 
         // Define the input string
         String input = "level";
@@ -187,6 +187,153 @@ public class PalindromeCheckerApp {
         }
     }
 
+    // ===== UC9: Recursive Palindrome Checker =====
+    public static void checkPalindromeUsingRecursion() {
+
+        String word = "madam";
+
+        boolean isPalindrome = check(word, 0, word.length() - 1);
+
+        System.out.println("UC9 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
+    /*
+     Recursively checks whether a string is palindrome.
+
+     @param s Input string
+     @param start Starting index
+     @param end Ending index
+     @return true if palindrome, otherwise false
+    */
+    private static boolean check(String s, int start, int end) {
+
+        // Base Condition: if pointers cross or meet
+        if (start >= end) {
+            return true;
+        }
+
+        // If characters do not match
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call moving inward
+        return check(s, start + 1, end - 1);
+    }
+
+    // ===== UC10: Case-Insensitive & Space-Ignored Palindrome =====
+    public static void checkNormalizedPalindrome() {
+
+        String input = "A man a plan a canal Panama";
+
+        // Normalize string
+        // Remove all non-alphanumeric characters and convert to lowercase
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        boolean isPalindrome = true;
+
+        // Apply palindrome logic
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        System.out.println("UC10 → Original String: " + input);
+        System.out.println("UC10 → Normalized String: " + normalized);
+        System.out.println("UC10 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
+    // ===== UC11: Object-Oriented Palindrome Service =====
+    public static void checkPalindromeUsingServiceClass() {
+
+        String input = "madam";
+
+        // Create service object
+        PalindromeService service = new PalindromeService();
+
+        // Call service method
+        boolean result = service.checkPalindrome(input);
+
+        System.out.println("UC11 → Input String: " + input);
+        System.out.println("UC11 → Is it a palindrome? " + result);
+        System.out.println();
+    }
+
+    // ===== UC12: Strategy Pattern for Palindrome Algorithms =====
+    public static void checkPalindromeUsingStrategyPattern() {
+
+        String input = "madam";
+
+        // Choose algorithm dynamically
+        PalindromeStrategy strategy;
+
+        // Example: use Stack strategy
+        strategy = new StackStrategy();
+
+        boolean result = strategy.check(input);
+
+        System.out.println("UC12 → Using Stack Strategy");
+        System.out.println("UC12 → Input: " + input);
+        System.out.println("UC12 → Is it a palindrome? " + result);
+        System.out.println();
+
+        // Switch to another algorithm at runtime
+        strategy = new DequeStrategy();
+
+        result = strategy.check(input);
+
+        System.out.println("UC12 → Using Deque Strategy");
+        System.out.println("UC12 → Input: " + input);
+        System.out.println("UC12 → Is it a palindrome? " + result);
+        System.out.println();
+    }
+
+    // ===== UC13: Performance Comparison =====
+    public static void comparePalindromePerformance() {
+
+        String input = "A man a plan a canal Panama".replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        PalindromeStrategy stackStrategy = new StackStrategy();
+        PalindromeStrategy dequeStrategy = new DequeStrategy();
+
+        // Measure Stack Strategy
+        long startStack = System.nanoTime();
+        boolean stackResult = stackStrategy.check(input);
+        long endStack = System.nanoTime();
+
+        long stackDuration = endStack - startStack;
+
+        // Measure Deque Strategy
+        long startDeque = System.nanoTime();
+        boolean dequeResult = dequeStrategy.check(input);
+        long endDeque = System.nanoTime();
+
+        long dequeDuration = endDeque - startDeque;
+
+        System.out.println("===== UC13 Performance Comparison =====");
+
+        System.out.println("Stack Strategy Result: " + stackResult);
+        System.out.println("Stack Execution Time: " + stackDuration + " ns");
+
+        System.out.println();
+
+        System.out.println("Deque Strategy Result: " + dequeResult);
+        System.out.println("Deque Execution Time: " + dequeDuration + " ns");
+
+        System.out.println();
+    }
+
+
+
 
     // ===== Main Method =====
     public static void main(String[] args) {
@@ -198,7 +345,91 @@ public class PalindromeCheckerApp {
         checkPalindromeUsingStack();      // UC5
         checkPalindromeUsingQueueAndStack(); // UC6
         checkPalindromeUsingDeque();      // UC7
-        LinkedListBasedPalindromeChecker()  // UC8
+        checkLinkedListBasedPalindromeChecker();  // UC8
+        checkPalindromeUsingRecursion();     // UC9
+        checkNormalizedPalindrome();         // UC10
+        checkPalindromeUsingServiceClass(); // UC11
+        checkPalindromeUsingStrategyPattern(); // UC12
+        comparePalindromePerformance(); // UC13
     }
 
+}
+
+
+// ===== Palindrome Service Class (OOP Encapsulation) =====
+class PalindromeService {
+
+    /*
+     Checks whether the input string is a palindrome
+
+     @param input Input string
+     @return true if palindrome, false otherwise
+    */
+    public boolean checkPalindrome(String input) {
+
+        if (input == null) {
+            return false;
+        }
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
+
+// ===== Stack-Based Strategy =====
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
+        // Push characters to stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        // Compare with original
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+// ===== Deque-Based Strategy =====
+class DequeStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        java.util.Deque<Character> deque = new java.util.ArrayDeque<>();
+
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
+        }
+
+        while (deque.size() > 1) {
+
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
 }
