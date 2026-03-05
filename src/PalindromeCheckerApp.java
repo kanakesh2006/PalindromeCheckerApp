@@ -222,6 +222,36 @@ public class PalindromeCheckerApp {
         return check(s, start + 1, end - 1);
     }
 
+    // ===== UC10: Case-Insensitive & Space-Ignored Palindrome =====
+    public static void checkNormalizedPalindrome() {
+
+        String input = "A man a plan a canal Panama";
+
+        // Normalize string
+        // Remove all non-alphanumeric characters and convert to lowercase
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        boolean isPalindrome = true;
+
+        // Apply palindrome logic
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        System.out.println("UC10 → Original String: " + input);
+        System.out.println("UC10 → Normalized String: " + normalized);
+        System.out.println("UC10 → Is it a palindrome? " + isPalindrome);
+        System.out.println();
+    }
+
 
 
     // ===== Main Method =====
@@ -236,6 +266,7 @@ public class PalindromeCheckerApp {
         checkPalindromeUsingDeque();      // UC7
         checkLinkedListBasedPalindromeChecker()  // UC8
         checkPalindromeUsingRecursion();     // UC9
+        checkNormalizedPalindrome();         // UC10
     }
 
 }
