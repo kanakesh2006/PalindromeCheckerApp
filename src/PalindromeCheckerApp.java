@@ -297,6 +297,40 @@ public class PalindromeCheckerApp {
         System.out.println();
     }
 
+    // ===== UC13: Performance Comparison =====
+    public static void comparePalindromePerformance() {
+
+        String input = "A man a plan a canal Panama".replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        PalindromeStrategy stackStrategy = new StackStrategy();
+        PalindromeStrategy dequeStrategy = new DequeStrategy();
+
+        // Measure Stack Strategy
+        long startStack = System.nanoTime();
+        boolean stackResult = stackStrategy.check(input);
+        long endStack = System.nanoTime();
+
+        long stackDuration = endStack - startStack;
+
+        // Measure Deque Strategy
+        long startDeque = System.nanoTime();
+        boolean dequeResult = dequeStrategy.check(input);
+        long endDeque = System.nanoTime();
+
+        long dequeDuration = endDeque - startDeque;
+
+        System.out.println("===== UC13 Performance Comparison =====");
+
+        System.out.println("Stack Strategy Result: " + stackResult);
+        System.out.println("Stack Execution Time: " + stackDuration + " ns");
+
+        System.out.println();
+
+        System.out.println("Deque Strategy Result: " + dequeResult);
+        System.out.println("Deque Execution Time: " + dequeDuration + " ns");
+
+        System.out.println();
+    }
 
 
 
@@ -316,6 +350,7 @@ public class PalindromeCheckerApp {
         checkNormalizedPalindrome();         // UC10
         checkPalindromeUsingServiceClass(); // UC11
         checkPalindromeUsingStrategyPattern(); // UC12
+        comparePalindromePerformance(); // UC13
     }
 
 }
